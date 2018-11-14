@@ -10,3 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 What did the fish say when it swam into a wall? 
+
+Dam!! 
+
+Where did the general put his armies?
