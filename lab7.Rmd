@@ -62,4 +62,5 @@ guns_x2
 
 ```
 
-Recommended government action on gun access differes significantly for males and females ($\chi^2$(r`guns_x2$parameter`) = ..., p < 0.001)
+Recommended government action on gun access differes significantly for males and females ($\chi^2$(`r guns_x2$parameter`) = ..., p < 0.001)
+
