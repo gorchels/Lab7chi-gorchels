@@ -18,3 +18,23 @@ Where did the general put his armies?
 Into his sleevies! 
 
 I am reaaaally stumped on this one!! 
+
+Why are there spaces between your fingers? 
+
+
+1. Loading the tidyverse and reading in the data 
+```{r}
+library(tidyverse)
+gc_df = read_csv("gc_df.csv")
+#View(gc_df)
+
+get_guns = gc_df %>% 
+  filter(gender != "NA", make_get_guns != "NA") %>% 
+  count(gender, make_get_guns) %>% 
+  spread(make_get_guns, n) %>% 
+  select(-gender) 
+  
+  rownames(get_guns) =c("Female", "Male")
+#View(get_guns)
+```
+
