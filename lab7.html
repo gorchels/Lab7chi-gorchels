@@ -132,7 +132,63 @@ $(document).ready(function () {
 <p>What did the fish say when it swam into a wall?</p>
 <p>Dam!!</p>
 <p>Where did the general put his armies?</p>
+<p>Into his sleevies!</p>
 <p>I am reaaaally stumped on this one!!</p>
+<p>Why are there spaces between your fingers?</p>
+<ol style="list-style-type: decimal">
+<li>Loading the tidyverse and reading in the data</li>
+</ol>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------------ tidyverse 1.2.1 --</code></pre>
+<pre><code>## v ggplot2 3.0.0     v purrr   0.2.5
+## v tibble  1.4.2     v dplyr   0.7.6
+## v tidyr   0.8.1     v stringr 1.3.1
+## v readr   1.1.1     v forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts --------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>gc_df = read_csv(&quot;gc_df.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   caseid = col_integer(),
+##   make_get_guns = col_character(),
+##   gender = col_character(),
+##   ideology = col_character(),
+##   trust_in_gov = col_character(),
+##   religion = col_character(),
+##   race = col_character()
+## )</code></pre>
+<pre class="r"><code>#View(gc_df)
+
+get_guns = gc_df %&gt;% 
+  filter(gender != &quot;NA&quot;, make_get_guns != &quot;NA&quot;) %&gt;% 
+  count(gender, make_get_guns) %&gt;% 
+  spread(make_get_guns, n) %&gt;% 
+  select(-gender) 
+  
+  rownames(get_guns) =c(&quot;Female&quot;, &quot;Male&quot;)</code></pre>
+<pre><code>## Warning: Setting row names on a tibble is deprecated.</code></pre>
+<pre class="r"><code>#View(get_guns)</code></pre>
+<p>I am the collaborator, Renee Albrecht, and I am going to do chi-square.</p>
+<p>Chi-sqaure question:</p>
+<p>Is there a significant difference in gun control perspectives (as related to access to guns) for males and females? Is there a significant association between sex and gun control recommendations? Is perception of gun control access independent of sex?</p>
+<p>All of the above questions are asking the same thing.</p>
+<pre class="r"><code>guns_prop &lt;- prop.table(as.matrix(get_guns), 1)
+
+guns_prop</code></pre>
+<pre><code>##            Easier More Difficult      Same
+## Female 0.02980675      0.5738618 0.3963315
+## Male   0.08139535      0.4038055 0.5147992</code></pre>
+<pre class="r"><code># Perform chi-square
+
+guns_x2 &lt;- chisq.test(get_guns)
+guns_x2</code></pre>
+<pre><code>## 
+##  Pearson's Chi-squared test
+## 
+## data:  get_guns
+## X-squared = 203.6, df = 2, p-value &lt; 2.2e-16</code></pre>
+<p>Recommended government action on gun access differes significantly for males and females (<span class="math inline">\(\chi^2\)</span>(r<code>guns_x2$parameter</code>) = …, p &lt; 0.001)</p>
 
 
 
